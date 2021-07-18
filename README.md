@@ -6,7 +6,7 @@ A simple web calculator
 Clone the repo with `git clone https://github.com/Skwaku/WebCalculator.git`.
 Run `pip install -r requirements.txt`.
 
-## Setting Secret_key as a environment variable
+## Set Secret_key as an environment variable
 
 ## Running the site
 
