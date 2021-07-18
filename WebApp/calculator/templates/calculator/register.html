@@ -1,0 +1,93 @@
+{% extends 'calculator/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} WebCal - Signup {% endblock %}
+{% block content %}
+    <section class="container bg-light" style="height:100vh;">
+         <div class="row justify-content-center">
+             <div class="card mt-3 mb-3 bg-white justify-content-center" style="width:25rem;height:30rem;cursor:pointer;">
+                 <div class="heading-1 mb-2">
+                    <h4 class="d-flex justify-content-center" style="font-weight:500;">Sign Up</h4>
+                 </div>
+                 <div class="input mr-3 ml-3" style="font-weight:500;">
+                     <div class="text-center mt-1" style="font-size:0.8rem;">
+                            {% if messages  %}
+                             {% for message in messages %}
+                                  <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
+                                    <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+                                    <a>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}{{ message.tags|title }}{% endif %}!</a> {{ message }}
+                                  </div>
+                             {% endfor %}
+                           {% endif %}
+                     </div>
+                      <form action="{% url 'register' %}" method="post">
+                        {% csrf_token %}
+                          <div class="row">
+                          <div class="col-md-12">
+                                  <div class="form-group">
+                                    <p id="username" class="">{{ form.username }}</p>
+                                      {% if form.username.errors %}
+                                         <div class="alert alert-danger alert-dismissible" role="alert" style="padding:1px 1px; font-size:0.8rem;">
+									         <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+                                             {{ form.username.errors }}
+                                         </div>
+                                      {% endif %}
+                                  </div>
+                            </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                    <p id="id_password1">{{ form.password1 }}</p>
+                                      {% if form.password1.errors %}
+                                         <div class="alert alert-danger alert-dismissible" role="alert" style="padding:1px 1px; font-size:0.8rem;">
+									         <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+                                             {{ form.password1.errors }}
+                                         </div>
+                                      {% endif %}
+                                  </div>
+                            </div>
+                            <div class="col-md-6">
+                                  <div class="form-group">
+                                    <p id="id_password2">{{ form.password2 }}</p>
+                                      {% if form.password2.errors %}
+                                         <div class="alert alert-danger alert-dismissible" role="alert" style="padding:1px 1px; font-size:0.8rem;">
+									         <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+                                             {{ form.password2.errors }}
+                                         </div>
+                                      {% endif %}
+                                  </div>
+                            </div>
+                            <div class="col-md-6">
+                                  <div class="form-group">
+                                    <p id="id_first_name" class="">{{ form.first_name }}</p>
+                                      {% if form.first_name.errors %}
+                                         <div class="alert alert-danger" style="font-size:0.8rem;">{{ form.first_name.errors }}</div>
+                                      {% endif %}
+                                  </div>
+                            </div>
+                            <div class="col-md-6">
+                                  <div class="form-group">
+                                    <p id="id_last_name" class="">{{ form.last_name }}</p>
+                                      {% if form.last_name.errors %}
+                                         <div class="alert alert-danger" style="font-size:0.8rem;">{{ form.last_name.errors }}</div>
+                                      {% endif %}
+                                  </div>
+                            </div>
+                            <div class="col-md-12">
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-lg btn-block text-white" type="submit" style="font-weight:700;">Sign Up</button>
+                            </div>
+                          </div>
+                          </div>
+                      </form>
+                     <div class="col-md-12 border-top pt-2">
+                         <div>
+                            <small class="text-muted ml-3">
+                                Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Log in</a>
+                            </small>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+    </section>
+{% endblock %}

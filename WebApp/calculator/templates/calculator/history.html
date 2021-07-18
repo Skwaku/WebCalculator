@@ -1,0 +1,57 @@
+{% extends 'calculator/index.html' %}
+
+{% load static %}
+{% block content %}
+  <section class="container bg-white mt-4" style="height:100vh;">
+    <div class="col-md-12">
+        <div class="col-md d-flex justify-content-center">
+            <div class="row" style="width:100%;">
+                 <section class="container mt-2">
+                     <h5 class="d-flex justify-content-center text-dark" style="font-weight:1200;">History</h5>
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th scope="col">No.</th>
+                      <th scope="col">Expression</th>
+                      <th scope="col">Result</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in history %}
+                        <tr style="font-size:12.5px;">
+                          <td>{{ i.id }}</td>
+                          <td class="text-dark">{{ i.expression }}</td>
+                          <td>{{ i.result }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                     <div class="d-flex justify-content-center  mb-5">
+                         {% if history.has_other_pages %}
+                              <ul class="pagination mt-1 bg-white">
+                                {% if history.has_previous %}
+                                  <li><a href="?page={{ history.previous_page_number }}">&laquo;</a></li>
+                                {% else %}
+                                  <li class="disabled"><span>&laquo;</span></li>
+                                {% endif %}
+                                {% for x in history.paginator.page_range %}
+                                  {% if history.number == x %}
+                                    <li class="active"><span>{{ x }} <span class="sr-only">(current)</span></span></li>
+                                  {% else %}
+                                    <li><a href="?page={{ x }}">{{ x }}</a></li>
+                                  {% endif %}
+                                {% endfor %}
+                                {% if history.has_next %}
+                                  <li><a href="?page={{ history.next_page_number }}">&raquo;</a></li>
+                                {% else %}
+                                  <li class="disabled"><span>&raquo;</span></li>
+                                {% endif %}
+                              </ul>
+                         {% endif %}
+                     </div>
+                 </section>
+                </div>
+        </div>
+    </div>
+  </section>
+{% endblock %}
