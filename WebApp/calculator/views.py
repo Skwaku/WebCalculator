@@ -74,14 +74,27 @@ def register(request):
 @login_required(login_url="/")
 def profile(request):
     if request.method == 'POST':
-        user_form = UserUpdateForm(request.POST, instance=request.user)
-        if user_form.is_valid():
-            user_form.save()
-            messages.success(request, f'Your account has been updated!')
-            return redirect('profile')
+        form = UserUpdateForm(request.POST)
+        if form.is_valid():
+            try:
+                password = form.cleaned_data['password']
+                first_name = form.cleaned_data['first_name']
+                last_name = form.cleaned_data['last_name']
+                form.save(commit=False)
+                u = User.objects.get(username=request.user.username)
+                u.set_password(password)
+                u.first_name = first_name
+                u.last_name = last_name
+                u.save()
+                messages.success(request, f'Your account has been updated!. Please log in with your new password.')
+                return redirect('profile')
+            except Exception as e:
+                print(e)
+                messages.error(request, 'An error occurred. Please try again.')
+                return redirect('profile')
     else:
-        user_form = UserUpdateForm(instance=request.user)
-    contex = {'user_form': user_form}
+        form = UserUpdateForm()
+    contex = {'form': form}
     return render(request, 'calculator/profile.html', contex)
 
 

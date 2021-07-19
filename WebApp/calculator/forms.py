@@ -66,7 +66,10 @@ class CalculatorForm(forms.ModelForm):
 
 
 class UserUpdateForm(forms.ModelForm):
+    first_name = forms.CharField(widget=forms.TextInput, max_length=100,required=True)
+    last_name = forms.CharField(widget=forms.TextInput, max_length=100,required=True)
+    password = forms.CharField(widget=forms.PasswordInput,max_length=100)
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name']
+        fields = ['first_name', 'last_name','password']

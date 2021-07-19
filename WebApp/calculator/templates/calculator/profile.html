@@ -7,41 +7,47 @@
    <section class="container" style="height:100vh;">
         <div class="row bg-light justify-content-center">
             <div class="content justify-content-center mt-4 mb-4">
-                <div class="container mb-5" style="padding:4px;">
-                    {% if user.username %}
-                      <strong class="col-md-6">username:</strong>
-                      <div class="col-md-6">
-                        <a>{{ user.username }}</a>
-                      </div>
-                    {% endif %}
-                    {% if user.first_name %}
-                    <div class="mt-2">
-                      <strong class="col-md-6">first Name:</strong>
-                      <div class="col-md-6">
-                        <a>{{ user.first_name }}</a>
-                      </div>
-                    </div>
-                    {% endif %}
-                    {% if user.last_name %}
-                     <div class="mt-2">
-                        <strong class="col-md-6">Last Name:</strong>
-                        <div class="col-md-12">
-                            <a>{{ user.last_name }}</a>
+                <div class="row">
+                <div class="col-md-6">
+                    <div class="container mb-5" style="padding:4px;">
+                        {% if user.username %}
+                          <strong class="col-md-6">username:</strong>
+                          <div class="col-md-6">
+                            <a>{{ user.username }}</a>
+                          </div>
+                        {% endif %}
+                        {% if user.first_name %}
+                        <div class="mt-2">
+                          <strong class="col-md-6">first Name:</strong>
+                          <div class="col-md-6">
+                            <a>{{ user.first_name }}</a>
+                          </div>
                         </div>
-                     </div>
-                    {% endif %}
+                        {% endif %}
+                        {% if user.last_name %}
+                         <div class="mt-2">
+                            <strong class="col-md-6">Last Name:</strong>
+                            <div class="col-md-12">
+                                <a>{{ user.last_name }}</a>
+                            </div>
+                         </div>
+                        {% endif %}
+                    </div>
                 </div>
-             <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
+                <div class="col-md-6">
+                     <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
 
-                <fieldset class="form-group ml-3 mr-3">
-                    <strong>Change profile:</strong>
-                          {{ user_form|crispy}}
-                </fieldset>
-                <div class="form-group">
-                    <button class="btn btn-outline-info ml-3" type="submit">Save changes</button>
+                        <fieldset class="form-group ml-3 mr-3">
+                            <strong>Change profile:</strong>
+                                  {{ form|crispy}}
+                        </fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-outline-info ml-3" type="submit">Save changes</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+          </div>
         </div>
      </div>
    </section>
