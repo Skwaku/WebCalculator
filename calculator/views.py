@@ -74,10 +74,10 @@ def register(request):
 @login_required(login_url="/")
 def profile(request):
     if request.method == 'POST':
-        form = UserUpdateForm(request.POST)
+        form = UserUpdateForm(request.POST,instance=request.user)
         if form.is_valid():
             try:
-                password = form.cleaned_data['password']
+                password = form.cleaned_data['password2']
                 first_name = form.cleaned_data['first_name']
                 last_name = form.cleaned_data['last_name']
                 form.save(commit=False)
