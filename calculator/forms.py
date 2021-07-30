@@ -72,29 +72,10 @@ class UserUpdateForm(forms.ModelForm):
     last_name = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control', 'type': 'text', 'name': 'last_name'}),
         max_length=50, required=False)
-    password1 = forms.CharField(widget=forms.PasswordInput(
-        attrs={'class': 'form-control', 'type': 'password', 'name': 'password1'}),
-                                max_length=100, required=False)
-    password2 = forms.CharField(widget=forms.PasswordInput(
-        attrs={'class': 'form-control', 'type': 'password', 'name': 'password2'}),
-        max_length=100, required=False)
-    password3 = forms.CharField(widget=forms.PasswordInput(
-        attrs={'class': 'form-control', 'type': 'password', 'name': 'password3'}),
-        max_length=100, required=False)
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={'class': 'form-control', 'type': 'password', 'name': 'password'}),
+                                max_length=100, required=True)
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name','password1','password2','password3']
-
-    def check_password_exists(self):
-        try:
-            password1 = User.objects.get(password__iexact=self.cleaned_data['password1'])
-            return self.cleaned_data['password1']
-        except User.DoesNotExist:
-            raise forms.ValidationError(_("The password does not exist."))
-
-    def clean_password(self):
-        if 'password2' in self.cleaned_data and 'password3' in self.cleaned_data:
-            if self.cleaned_data['password2'] != self.cleaned_data['password3']:
-                raise forms.ValidationError(_("The two password fields did not match."))
-        return self.cleaned_data
+        fields = ['first_name', 'last_name','password']

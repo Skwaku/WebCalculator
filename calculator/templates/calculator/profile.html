@@ -37,8 +37,6 @@
                 <div class="col-md-6">
                      <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-
-<!--                        <fieldset class="form-group ml-3 mr-3">-->
                             <strong>Change profile</strong>
                             <div class="col-md-6">
 								<strong>First Name:</strong>
@@ -65,42 +63,17 @@
 							    {% endif %}
                             </div>
                             <div class="col-md-12">
-								<strong>Old Password:</strong>
-                                  <div class="form-group">
-                                      <input type="text" id="password1" name="password1" required size="15">
-                                  </div>
-								{% if form.password1.errors %}
-								   <div class="alert alert-danger alert-dismissible" role="alert" style="padding:1px 1px; font-size:0.8rem;">
-									   <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
-									   {{ form.password1.errors }}
-								   </div>
-							    {% endif %}
-                            </div>
-                             <div class="col-md-6">
 								<strong>New Password:</strong>
                                   <div class="form-group">
-                                      <input type="text" id="password2" name="password2" required size="15">
+                                      <input type="text" id="password" name="password" required size="15">
                                   </div>
-								{% if form.password2.errors %}
+								{% if form.password.errors %}
 								   <div class="alert alert-danger alert-dismissible" role="alert" style="padding:1px 1px; font-size:0.8rem;">
 									   <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
-									   {{ form.password2.errors }}
+									   {{ form.password.errors }}
 								   </div>
 							    {% endif %}
                             </div>
-                            <div class="col-md-6">
-								<strong>Confirm Password:</strong>
-                                  <div class="form-group">
-                                      <input type="text" id="password3" name="password3" required size="15">
-                                  </div>
-								{% if form.password3.errors %}
-								   <div class="alert alert-danger alert-dismissible" role="alert" style="padding:1px 1px; font-size:0.8rem;">
-									   <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
-									   {{ form.password3.errors }}
-								   </div>
-							    {% endif %}
-                            </div>
-<!--                        </fieldset>-->
                         <div class="form-group">
                             <button class="btn btn-outline-info ml-3" type="submit">Save changes</button>
                         </div>
